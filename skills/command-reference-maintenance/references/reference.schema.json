@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sanitized Command Reference",
+  "type": "object",
+  "required": ["meta", "commands"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["shell", "source", "schema_version", "total_unique_commands"],
+      "properties": {
+        "shell": {"enum": ["pwsh", "bash"]},
+        "source": {"type": "string"},
+        "schema_version": {"type": "string"},
+        "total_unique_commands": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "name", "module", "versions", "alias_target"],
+        "properties": {
+          "type": {"enum": ["Alias", "Cmdlet", "Function", "Filter", "Command"]},
+          "name": {"type": "string", "minLength": 1},
+          "module": {"type": "string", "minLength": 1},
+          "versions": {"type": "array", "items": {"type": "string"}},
+          "alias_target": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
