@@ -1,0 +1,29 @@
+schema_version: 1
+portfolio: personal-portfolio
+updated: YYYY-MM-DD
+
+attention_budget:
+  core_reliability: 1
+  cross_system_contract: 1
+  active_experiment: 1
+
+lifecycle_taxonomy:
+  core-system: Personally relied-on authority with clear ownership and recovery expectations.
+  active-personal-tool: Useful recurring personal workflow tool with bounded maintenance.
+  integration-contract: Sanitized compatibility or handoff surface; not a duplicate runtime.
+  active-laboratory: Bounded experiment with a question and stop condition.
+  maintenance-utility: Narrow tool retained only while it has direct value.
+  reference-history: Preserved history with no active roadmap capacity.
+  upstream-mirror: Upstream/contribution surface, not a personal product roadmap.
+  archive-after-audit: Preserve retained value, then archive with a successor note.
+  commercial-occasional: Commercial work evaluated against its own operating commitments.
+  public-interest-occasional: Public-interest work evaluated against its own stewardship commitments.
+
+repositories:
+  - repository: example-repository
+    domain: music | pkm | homelab | workstation | agent-workflows | commercial | public-interest
+    lifecycle: active-personal-tool
+    role: Describe the workflow role.
+    canonical_boundary: State the data/configuration/behavior boundary.
+    next_commitment: State one concrete decision, acceptance condition, or reliability action.
+    review: quarterly | next milestone | when reactivated
