@@ -89,6 +89,10 @@ Last updated: July 14, 2026
 | `homelab-research-librarian` | Teaches agents where and how to find reliable homelab and self-hosting information | `skills/homelab-research-librarian/SKILL.md` |
 | `homelab-sre-agent` | SRE-style agent behavior over monitoring tools and MCP endpoints | `skills/homelab-sre-agent/SKILL.md` |
 | `homelab-network-auditor` | Scans homelab for open ports, audits firewall rules, and generates network security reports | `skills/homelab-network-auditor/SKILL.md` |
+| `native-wsl-workspaces` | Establishes an authoritative native WSL workspace and prevents unsafe UNC, mount, and remote-write confusion | `skills/native-wsl-workspaces/SKILL.md` |
+| `proxmox-ve-operations` | Guides official-first, read-before-write Proxmox VE 9 operations across guests, storage, networking, backup, and access | `skills/proxmox-ve-operations/SKILL.md` |
+| `proxmox-service-guest-gate` | Gates fresh Proxmox service-guest creation and protects legacy guests from implicit changes | `skills/proxmox-service-guest-gate/SKILL.md` |
+| `bitwarden-machine-account-ops` | Designs and operates scoped Bitwarden Secrets Manager machine accounts, bws injection, SDK exceptions, rotation, and recovery | `skills/bitwarden-machine-account-ops/SKILL.md` |
 
 ### Infrastructure Action Skills
 
@@ -168,14 +172,14 @@ Last updated: July 14, 2026
 | Meta / Reasoning | 0 | 6 | 6 |
 | Coding | 0 | 5 | 5 |
 | Obsidian (official + bespoke) | 4 | 5 | 9 |
-| Homelab (behavior + action) | 11 | 0 | 11 |
+| Homelab (behavior + action) | 15 | 0 | 15 |
 | Media / Music / DJ | 13 | 0 | 13 |
 | Social | 0 | 2 | 2 |
 | MCP / Tool Bridge | 3 | 1 | 4 |
-| **Total** | **31** | **19** | **50** |
+| **Total** | **35** | **19** | **54** |
 
-> **31 skills have committed standalone `skills/<id>/SKILL.md` trees and are fully invocable.**
-> (git-safe-ops, memory-layer-bridge, and lyrics-and-theory-bridge standalone trees committed July 14, 2026.)
+> **35 skills have committed standalone `skills/<id>/SKILL.md` trees and are fully invocable.**
+> The four project-exported control-plane and security skills were added on August 17, 2026.
 > **19 skills have composite `.SKILL.md` specs only and must be migrated before they are invocable.**
 > Skills are counted by unique skill IDs. MCP config files are not counted as skills.
 > `filesystem-refactor-planner` remains composite (1 ghost in MCP / Tool Bridge category).

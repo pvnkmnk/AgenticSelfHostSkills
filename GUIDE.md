@@ -72,15 +72,17 @@ skills:
 
 ### Homelab
 
-**Skills:** `homelab-safe-ops` · `homelab-change-planner` · `homelab-monitoring-analyst` · `homelab-logbook` · `homelab-research-librarian` · `homelab-sre-agent` · `homelab-topology-mapper` · `homelab-network-auditor` · `docker-app-deployer` · `reverse-proxy-and-tunnel` · `media-stack-builder`
+**Skills:** `native-wsl-workspaces` · `proxmox-ve-operations` · `proxmox-service-guest-gate` · `bitwarden-machine-account-ops` · `homelab-safe-ops` · `homelab-change-planner` · `homelab-monitoring-analyst` · `homelab-logbook` · `homelab-research-librarian` · `homelab-sre-agent` · `homelab-topology-mapper` · `homelab-network-auditor` · `docker-app-deployer` · `reverse-proxy-and-tunnel` · `media-stack-builder`
 
 **MCP:** `mcp/proxmox-mcp.json`
 
 **Standard workflow:**
-1. Run `homelab-topology-mapper` to understand current state.
-2. Use `homelab-change-planner` to draft a change with rollback steps.
-3. Gate all execution through `homelab-safe-ops`.
-4. Log outcome with `homelab-logbook` + `obsidian-homelab-logbook`.
+1. Run `native-wsl-workspaces` when the control plane or repository lives in WSL; establish the native authoritative path before any write.
+2. Run `proxmox-ve-operations` for official-first read-only platform inventory, access, storage, backup, or networking guidance.
+3. Use `proxmox-service-guest-gate` before proposing or creating a new service LXC/VM; it requires an exact confirmation and protects legacy guests.
+4. Use `bitwarden-machine-account-ops` before a host, service, CI workflow, or SDK client receives machine-readable secrets.
+5. Run `homelab-topology-mapper` to understand current state and use `homelab-change-planner` to draft a change with rollback steps.
+6. Gate all execution through `homelab-safe-ops` and log the outcome with `homelab-logbook` + `obsidian-homelab-logbook`.
 
 **Network audit workflow:**
 1. `homelab-safe-ops` — confirm scope and get user approval.
