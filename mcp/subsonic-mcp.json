@@ -8,7 +8,7 @@
     "SUBSONIC_URL": "http://localhost:4533",
     "SUBSONIC_USER": "<your-subsonic-username>",
     "SUBSONIC_PASSWORD": "<your-subsonic-password>",
-    "SUBSONIC_CLIENT": "agent-skills-library"
+    "SUBSONIC_CLIENT": "agentic-self-host-skills"
   },
   "skills": [
     "subsonic-api-client",
