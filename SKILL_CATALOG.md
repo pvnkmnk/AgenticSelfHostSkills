@@ -32,6 +32,28 @@
 5. Record source repository, commit, and validation evidence for every promoted skill. Remove generated files such as `__pycache__` and `.pyc` from skill trees.
 6. Retire duplicate source repositories only after their provenance is recorded and no unique acceptance criterion remains.
 
+## Naming, Versioning, and Reference Rules
+
+| Concern | Rule |
+|---|---|
+| **Canonical name** | Use a unique, lowercase kebab-case capability name under `skills/<skill-name>/SKILL.md`. Prefer a clear workflow or decision name over vendor, host, or project nicknames. |
+| **Duplicate handling** | Search the canonical tree before admission. Extend the closest existing skill when the trigger and safe workflow materially overlap; create a new skill only for a distinct reusable decision boundary. |
+| **Version identity** | The Git commit SHA is the immutable version identity for a published skill tree. A skill may state a compatible tool or schema version in its own body, but it must not imply that a moving branch name is a tested release. |
+| **Validation evidence** | Every new or materially changed skill records its source, representative safe scenario, validation command or review method, and resulting commit in the change record or adjacent non-secret documentation. |
+| **Consumer reference** | Product repositories reference the canonical skill by repository URL, skill name, and, when reproducibility matters, tested commit SHA. They may retain a short local trigger note but must not fork or copy the shared behavioral body. |
+| **Local exception** | A product-local instruction remains local when it contains repository-specific interfaces, current architecture, user-experience context, host/operator behavior, or an unshareable decision. It must link to the canonical skill when both apply. |
+| **Deprecation** | Mark a superseded skill or source with its replacement, reason, last supported commit, and migration guidance. Do not silently delete a skill still referenced by a product or agent configuration. |
+| **Archival** | Archive a former source only after provenance, successor mapping, and any unique validation evidence are retained. Historical repositories are learning records, not duplicate operational authority. |
+
+### Maintainer workflow
+
+1. Classify a candidate as reusable behavior, product-local context, declared infrastructure, secret/action configuration, or private content.
+2. Keep only reusable behavior in this catalog; route the other categories to their canonical homes.
+3. Review for duplicate triggers, unsafe authority, private data, secrets, and environment-specific assumptions.
+4. Add or update the canonical skill tree, then validate a representative non-destructive scenario.
+5. Commit the behavioral change with concise provenance and validation evidence. Update consumer references rather than copying the skill into product repositories.
+6. When retiring a skill, publish its successor note before removing any consumer reference or source material.
+
 ## Current Consolidation Result
 
 The handoff did not create a second active skills authority. `AgenticSelfHostSkills` and the prior `agent-skills-library` URL resolve to the same GitHub repository and commit history. The only promoted handoff-specific skill is `universal-agent-handoff`; all other imported material is either already canonical, runtime-provided, or deliberately localized.
