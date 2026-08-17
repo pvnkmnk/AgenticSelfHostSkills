@@ -1,11 +1,12 @@
-# agent-skills-library
+# AgenticSelfHostSkills
 
 > A comprehensive, opinionated agent skills library for **OpenCode**, **Freebuff**, **Antigravity CLI**, and **Codex** — covering homelab, media, music, DJ, Obsidian, coding, and social domains.
 
 **Owner:** pvnkmnk  
-**Last updated:** July 14, 2026  
+**Last updated:** August 17, 2026
+**Former repository path:** `pvnkmnk/agent-skills-library` (redirects here)
 **Stack:** Windows 11 + WSL2, MCP, Obsidian, Cipher/Mem0, slskd, Subsonic/OpenSubsonic, Proxmox  
-**Skills:** 52 canonical skills across 7 domains
+**Structure:** 37 standalone canonical skill trees plus composite discovery specifications
 
 ---
 
@@ -27,7 +28,7 @@ All skills live in a **flat, canonical tree**: `skills/<skill-name>/SKILL.md`. E
 Domain subdirectories (`skills/homelab/`, `skills/media/`, `skills/obsidian/`) are **meta-aggregator indexes** that link to canonical skill trees — they are not the primary skill locations.
 
 ```
-agent-skills-library/
+AgenticSelfHostSkills/
   README.md                          ← this file
   GUIDE.md                           ← practitioner guide (how to use, extend, operate)
   REFERENCE.md                       ← master skill + MCP index table
@@ -118,6 +119,10 @@ This agent has access to the skills in ./skills/. Use "Invoke <skill-name>" to a
 - **Freebuff:** `/skill <skill-name>`
 
 ---
+
+## Governance and Consolidation
+
+Read [`SKILL_CATALOG.md`](SKILL_CATALOG.md) for the canonical-home rules, intake and deprecation process, and provenance of skills promoted from validated handoffs. Reusable behavior belongs here; private control-plane instructions, service desired state, and secret values do not.
 
 ## MCP Action Layers
 
