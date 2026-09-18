@@ -41,6 +41,8 @@ Use `vzdump`/Proxmox backup facilities for guest configuration and managed volum
 
 Preserve current working connectivity. Confirm bridge, gateway, subnet, address allocation, VLAN behavior, and firewall scope before changes. Start self-hosted services on private LAN or private VPN access unless public exposure is separately approved. Test from an authorized client after any change.
 
+**PVE firewall has TWO independent rule sets — check both before diagnosing a "blocked port":** `/cluster/firewall/rules` AND `/nodes/<node>/firewall/rules`. Node rules compile into the kernel's `PVEFW-HOST-IN` chain independently of cluster rules (a cluster-level fix alone can leave a node-level `DROP` shadowing it). Rule changes apply to the kernel live — never reboot to "apply" them. Also: an SSH "banner exchange timeout" on a loaded node means I/O starvation, not a firewall block — check load average first.
+
 ### Node updates and upgrades
 
 For routine package updates, inspect repositories, available updates, backups, free root space, and current guest health first. Plan a maintenance window and a console/independent access path before a reboot. For a major upgrade, use the version-specific official upgrade guide, run its checker, verify backups, test on comparable hardware when practical, and do not upgrade while relying on an interruptible remote-only session.

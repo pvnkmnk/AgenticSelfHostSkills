@@ -51,6 +51,14 @@ storage:
   backup-target: proxmox-backup-server
 ```
 
+## This homelab
+
+The schema above stays generic on purpose. The current verified map for this
+homelab lives in `homelab-proxmox-ansible/docs/network-map.md`, with service
+and storage detail in `homelab-proxmox-ansible/docs/observed-state.md`. Update
+those rather than producing a parallel map, and treat the staged validation
+directories as audit history, not as current state.
+
 ## Companion Skills
 
 - `homelab-change-planner` — use topology as input to change plans

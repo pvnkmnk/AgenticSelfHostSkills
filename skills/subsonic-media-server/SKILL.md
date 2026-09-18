@@ -29,6 +29,13 @@ Provide agent-level control over a self-hosted Subsonic-compatible music streami
 - Do not delete playlists or user data without explicit confirmation.
 - Validate server reachability before attempting bulk operations.
 
+## Instance Addendum: Navidrome on CT 101 "homelab-core" (192.168.2.242)
+
+- **Production container** — `deluan/navidrome:0.63.2` in Docker on CT 101, port 4533, up 12+ days at last verify. **Never restart it to apply changes.**
+- Health check: `curl -fsS -o /dev/null -w "%{http_code}" http://127.0.0.1:4533/` on the CT → `302` = healthy (login redirect).
+- Music volume: `/opt/homelab/navidrome/music` (590 GiB). Library changes happen via beets in the same CT, then trigger a rescan — **via the Subsonic API only**, not container restarts.
+- Access from the agent: `ssh root@192.168.2.242` first; the port is local to the CT/LAN.
+
 ## MCP
 - **subsonic-mcp** (`mcp/subsonic-mcp.json`) — OpenSubsonic REST wrapper; provides search, playlist, scan, stream tools.
 

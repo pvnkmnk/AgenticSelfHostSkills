@@ -39,6 +39,21 @@ Produces a current-state map of the Proxmox homelab cluster. Enumerates all node
 | Name | Type | Size | Used |
 ```
 
+## Verified Baseline (2026-09-18)
+
+Last verified live topology — re-enumerate before acting, but use this as the sanity baseline:
+
+| Object | Value |
+|---|---|
+| Node | `proxmox` — PVE 9.2.11, `192.168.2.9`, tailnet `100.65.21.28` (i5-7200U 2c/4t, 8 GB, 1 TB 5400 RPM HDD) |
+| Storage | `local` (14% used), `local-lvm` (25.6% used) |
+| CT 101 | `homelab-core` — `192.168.2.242`, tailnet `100.80.82.44`, 2 vCPU/4 GB (verify before changes), Navidrome + slskd + beets |
+| Pool | `apppol` |
+| Tailnet | `tail0ea6ba.ts.net`: `mvnk` (Windows PC, 100.69.36.47), `proxmox`, `homelab-core`, `ai`, `pixel-10` |
+| Router | Bell Home Hub 3000, `192.168.2.1` — DNS filter NXDOMAINs reserved domains (example.com); account-level, not in hub UI |
+
+Rollback snapshot `pre-dedup-20260917` covers CT 101 rootfs + music volume. Full detail: `homelab music server library cleanup findings.md`.
+
 ## Companion Skills
 
 - `homelab-change-planner` — use topology as pre-flight context

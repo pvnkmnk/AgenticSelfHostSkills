@@ -2,6 +2,30 @@
 
 This reference defines the **Windows 11 and Ubuntu WSL control-plane pattern** for administering a Proxmox VE node securely. It is written for a private homelab whose current node is reachable at `192.168.2.9`, but its examples use placeholders so that the connection model can be reused. Read it before configuring a Windows SSH client, a WSL/Ansible control node, API access, browser TLS trust, or private remote access.
 
+> **Current state (2026-09-18, verified live).** The host is Proxmox VE 9.2.11 at
+> `192.168.2.9` (tailnet `100.65.21.28`, MagicDNS `proxmox.tail0ea6ba.ts.net`).
+> **SSHD IS NOW ENABLED** (`systemctl enable --now ssh`) and both the Windows PC
+> key (`idols@MVNK`) and working SSH paths exist: `ssh root@192.168.2.9` (host)
+> and `ssh root@192.168.2.242` (CT 101). The single running guest is
+> **CT 101 `homelab-core`** (not CT 100), serving Navidrome 0.63.2, slskd, and
+> beets 1.6.0 natively. A Tailscale tailnet is already in active use.
+>
+> **Verified connection facts that override generic guidance below:**
+> - Web UI `https://proxmox.tail0ea6ba.ts.net:8006` uses a Tailscale-issued cert
+>   (not the PVE cluster CA) — no trust-store import needed when browsing by the
+>   tailnet name.
+> - `ssh pve` from WSL does **not** work: WSL2 mirrored networking does not
+>   resolve MagicDNS names. Use raw IPs from WSL.
+> - PVE API GETs work from an authenticated browser session (`fetch('/api2/json/...')`),
+>   but **writes return 401** — the CSRFPreventionToken lives only in UI memory.
+>   For API writes use `pvesh` on the host over SSH.
+> - Hardware is a 2-core i5-7200U laptop with a **5400 RPM HDD** — load >4
+>   degrades it; load 8–12 makes SSH handshakes time out (looks like a network
+>   fault but isn't). One meaningful workload at a time.
+>
+> Observed evidence: `homelab-proxmox-ansible/docs/observed-state.md` and
+> `homelab music server library cleanup findings.md` (project root).
+
 > **Scope boundary.** Treat creating Linux users, adding `authorized_keys`, changing SSH daemon settings, importing a trust anchor, creating API tokens, installing a VPN client, or changing tailnet policy as state-changing operations. Inspect first, preserve console recovery, write the exact change request, and obtain confirmation before carrying them out. Do not modify legacy guests merely to establish a host connection.
 
 ## 1. Connection model and decision rule
@@ -237,7 +261,7 @@ If the Proxmox host is reinstalled, an SSH host key changes unexpectedly, a clie
 
 ## 10. Approval checklist for first implementation
 
-The first implementation request should name the exact Linux admin account, Proxmox human account, Windows public-key fingerprint, WSL public-key fingerprint, intended SSH hardening change, certificate choice, and the first API token’s role/path/expiry. It should also identify the console recovery route and confirm that CT 100 remains untouched. Only then should the connection configuration be applied.
+The first implementation request should name the exact Linux admin account, Proxmox human account, Windows public-key fingerprint, WSL public-key fingerprint, intended SSH hardening change, certificate choice, and the first API token’s role/path/expiry. It should also identify the console recovery route and confirm that CT 101 `homelab-core` and the library it serves remain untouched. Only then should the connection configuration be applied.
 
 | Check | Required evidence before approval |
 |---|---|

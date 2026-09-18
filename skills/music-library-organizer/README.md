@@ -9,7 +9,7 @@ Invoke via your agent: `Invoke music-library-organizer` (OpenCode/Codex) or `/sk
 ## What it does
 
 - Scans the slskd download directory (or configured inbox) for new files.
-- Runs `beet import -A` for auto-tagging with MusicBrainz lookup.
+- Uses explicit beets import tag policies (`-A` = asis/no tagging; never assume it auto-tags).
 - Flags low-confidence matches for manual review; logs ambiguous items.
 - Moves/copies files into the canonical library structure: `Library/Artist/Year - Album/Track - Title.ext`.
 - Applies standardized tags: artist, album, year, genre, MusicBrainz IDs, ReplayGain.

@@ -40,6 +40,15 @@ Stop and ask the user if:
 - `homelab-topology-mapper` — know the environment first
 - `reverse-proxy-and-tunnel` — safe exposure patterns
 
+## Environment Facts (verified 2026-09-18 — overrides generic assumptions)
+
+- **Proxmox host** `192.168.2.9` (tailnet `100.65.21.28`, MagicDNS `proxmox.tail0ea6ba.ts.net`), PVE 9.2.11. Hardware: 2-core i5-7200U laptop, 8 GB RAM, **5400 RPM HDD = the bottleneck**. Load 8–12 = thrashing (SSH handshakes die — looks like a network fault, isn't). One meaningful workload at a time.
+- **CT 101 `homelab-core`** `192.168.2.242` — the only guest; runs Navidrome (production, never restart without asking), slskd, beets 1.6.0.
+- **Access**: `ssh root@192.168.2.9` (host) and `ssh root@192.168.2.242` (CT) both work with the `idols@MVNK` key. SSH on the host required deleting TWO firewall DROP rules (cluster + node-level) — see `proxmox-ve-operations` skill before touching PVE firewall rules. `ssh pve` from WSL does not resolve (MagicDNS doesn't work inside WSL) — use IPs.
+- **Router**: Bell Home Hub 3000 at `192.168.2.1`. Its ISP-side DNS filter NXDOMAINs test/reserved domains (`example.com` etc.) — if a benign domain mysteriously fails to resolve, this is why; don't debug the app first.
+- **Diagnostics over GUI**: `ssh` + `pvesh` beats browser automation for anything the PVE web UI could do; xterm.js consoles in the web UI can be typed into but not read (canvas rendering).
+- Full verified state: `homelab music server library cleanup findings.md` (project root of DevWorks/homelab workspace).
+
 ## References
 
 - Proxmox VE docs: https://pve.proxmox.com/wiki/Main_Page
