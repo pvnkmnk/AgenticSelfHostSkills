@@ -47,7 +47,7 @@ Stop and ask the user if:
 - **Access**: `ssh root@192.168.2.9` (host) and `ssh root@192.168.2.242` (CT) both work with the `idols@MVNK` key. SSH on the host required deleting TWO firewall DROP rules (cluster + node-level) — see `proxmox-ve-operations` skill before touching PVE firewall rules. `ssh pve` from WSL does not resolve (MagicDNS doesn't work inside WSL) — use IPs.
 - **Router**: Bell Home Hub 3000 at `192.168.2.1`. Its ISP-side DNS filter NXDOMAINs test/reserved domains (`example.com` etc.) — if a benign domain mysteriously fails to resolve, this is why; don't debug the app first.
 - **Diagnostics over GUI**: `ssh` + `pvesh` beats browser automation for anything the PVE web UI could do; xterm.js consoles in the web UI can be typed into but not read (canvas rendering).
-- Full verified state: `homelab music server library cleanup findings.md` (project root of DevWorks/homelab workspace).
+- Full verified state: `docs/findings/2026-09-18-homelab-music-library-cleanup.md` in the AgenticSelfHostSkills repo.
 
 ## References
 

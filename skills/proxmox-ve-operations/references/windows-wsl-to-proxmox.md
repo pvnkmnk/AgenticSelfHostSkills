@@ -24,7 +24,7 @@ This reference defines the **Windows 11 and Ubuntu WSL control-plane pattern** f
 >   fault but isn't). One meaningful workload at a time.
 >
 > Observed evidence: `homelab-proxmox-ansible/docs/observed-state.md` and
-> `homelab music server library cleanup findings.md` (project root).
+> `docs/findings/2026-09-18-homelab-music-library-cleanup.md` in the AgenticSelfHostSkills repo.
 
 > **Scope boundary.** Treat creating Linux users, adding `authorized_keys`, changing SSH daemon settings, importing a trust anchor, creating API tokens, installing a VPN client, or changing tailnet policy as state-changing operations. Inspect first, preserve console recovery, write the exact change request, and obtain confirmation before carrying them out. Do not modify legacy guests merely to establish a host connection.
 
