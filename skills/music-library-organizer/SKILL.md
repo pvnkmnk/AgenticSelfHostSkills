@@ -77,7 +77,7 @@ Automate music file tagging and library organization using beets. Ingests raw do
 - Container facts: no `lsof`/`fuser` (use `/proc/*/fd` scanning); no ffprobe (beets DB already stores bitrate/depth/rate)
 - Host is a 2-core/5400-RPM-HDD laptop — heavy beets/fpcalc work must run `nice -n 19 ionice -c3`, single-worker, with an `flock` lockfile so relaunches can't stack
 - Navidrome runs in Docker on this CT — production; rescan via Subsonic API, never restart without asking
-- Full verified state: `docs/findings/2026-09-18-homelab-music-library-cleanup.md` in the AgenticSelfHostSkills repo
+- Full verified state: `pvnkmnk/homelab-proxmox-ansible` → `docs/findings/2026-09-18-homelab-music-library-cleanup.md` and `docs/LIBRARY_CLEANUP_WORKSTREAM.md` (canonical). Deep beets mechanics live in the `beets-lossless-automation` skill.
 
 ## References
 - beets documentation: https://beets.readthedocs.io/

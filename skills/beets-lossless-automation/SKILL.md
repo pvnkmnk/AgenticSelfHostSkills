@@ -77,8 +77,16 @@ fingerprints computed and injected. No incremental passes.
    keeps the file the policy says to keep. Config syntax that silently
    matches nothing is documented in `references/version-notes.md`.
 4. **Execute with `--move` into a dated quarantine dir.** Never `--delete`.
-   `--move` is same-filesystem rename + DB store; collisions are handled by
-   beets (`unique_path`). Keep the loser manifest (`-f '$path'` output).
+   **Assert the quarantine shares the library's filesystem first**
+   (`stat -c %d` on both) — a cross-filesystem `--move` silently becomes a
+   copy+delete at ~3–8 MB/s on spinning disks and can fill a small root volume.
+   This has already caused a disk-full incident once: see
+   `references/quarantine-and-disk-safety.md`. On the same filesystem the move is
+   an instant rename; collisions are handled by beets (`unique_path`). Keep the
+   loser manifest (`-f '$path'` output).
+   Then **purge the quarantined rows from the DB (rows only, `delete=False`)**
+   before the next pass — otherwise the next pass re-groups the same losers with
+   their own winners and moves them again.
 5. **Report**: groups found, losers quarantined by format tier, kept-winner
    samples, files skipped as corrupt. Review with the user before any merge
    or quarantine cleanup.
@@ -142,6 +150,11 @@ These come from a 2-core/5400-RPM-HDD host and apply anywhere I/O-bound:
   reconcile.
 - Nested `ssh | pct exec | bash -c` quoting burns hours. Write scripts to
   files and push them (base64 over the transport), never inline-quote.
+- **Disk-space safety for any bulk file operation:** know which volume you are
+  writing to (`findmnt -T PATH`, compare `stat -c %d`), and when recovering from
+  a full disk use `rsync -a --remove-source-files` so space is reclaimed per
+  file — `cp`-then-`rm` holds the disk at 100% for the entire copy, which on a
+  slow disk can mean hours of hazard for the services sharing that volume.
 
 ## Instance addendum: CT 101 "homelab-core"
 
@@ -155,7 +168,7 @@ These come from a 2-core/5400-RPM-HDD host and apply anywhere I/O-bound:
 - `fpcalc` from the `chromaprint` package; fingerprints cached at
   `/root/fingerprints.tsv` (path⇥duration⇥fingerprint) with done-list
   `/root/fp-done.txt`
-- Full environment: `docs/findings/2026-09-18-homelab-music-library-cleanup.md` in this repo
+- Full environment: `pvnkmnk/homelab-proxmox-ansible` → `docs/findings/2026-09-18-homelab-music-library-cleanup.md` (canonical; that repo is the authority for homelab state), plus `docs/LIBRARY_CLEANUP_WORKSTREAM.md` for the live workstream
 
 ## Upgrade path (planned, not yet executed)
 
@@ -174,4 +187,6 @@ the fresh-Debian-13-CT option and post-upgrade revalidation checklist, is in
   nonzero-exit bug
 - `references/bulk-injection.md` — ORM single-transaction attribute injection,
   WAVE naming, verification rules
+- `references/quarantine-and-disk-safety.md` — **read before any
+  `--move`**; the cross-device quarantine incident and the guard that prevents it
 - `references/upgrade-path.md` — 1.6.0 → 2.x playbook

@@ -52,7 +52,7 @@ Last verified live topology — re-enumerate before acting, but use this as the 
 | Tailnet | `tail0ea6ba.ts.net`: `mvnk` (Windows PC, 100.69.36.47), `proxmox`, `homelab-core`, `ai`, `pixel-10` |
 | Router | Bell Home Hub 3000, `192.168.2.1` — DNS filter NXDOMAINs reserved domains (example.com); account-level, not in hub UI |
 
-Rollback snapshot `pre-dedup-20260917` covers CT 101 rootfs + music volume. Full detail: `docs/findings/2026-09-18-homelab-music-library-cleanup.md` in the AgenticSelfHostSkills repo.
+Rollback snapshot `pre-dedup-20260917` covers CT 101 rootfs + music volume. Full detail: `pvnkmnk/homelab-proxmox-ansible` → `docs/findings/2026-09-18-homelab-music-library-cleanup.md`, plus `docs/observed-state.md` and `docs/network-map.md` there for the canonical topology.
 
 ## Companion Skills
 
